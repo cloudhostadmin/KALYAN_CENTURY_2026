@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>कल्याण शताब्दी वर्ष 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 28px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        input:disabled {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            color: #666;
+        }
+        
+        input:not(:disabled):focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+        
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .already-submitted {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .already-submitted h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .already-submitted p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>कल्याण शताब्दी वर्ष 2026</h1>
+        
+        <div id="alreadySubmitted" class="already-submitted" style="display: none;">
+            <h2>✅ Already Submitted</h2>
+            <p>This form has already been submitted and cannot be submitted again.</p>
+            <p style="margin-top: 10px; color: #999;">Thank you for your submission!</p>
+        </div>
+        
+        <form id="kalyanForm">
+            <div class="form-group">
+                <label for="customerId">Customer ID</label>
+                <input type="text" id="customerId" name="customerId" value="KLY2026001" disabled>
+            </div>
+            
+            <!-- Hidden payment link field -->
+            <input type="hidden" id="paymentLink" name="paymentLink" value="https://p.ppsl.io/PYTMPS/f4FEqk">
+            
+            <div class="form-group">
+                <label for="firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" name="firstName" value="राजेश" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" name="lastName" value="कुमार" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address1">Address 1 <span class="required">*</span></label>
+                <input type="text" id="address1" name="address1" value="123, मुख्य मार्ग" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address2">Address 2 <span class="required">*</span></label>
+                <input type="text" id="address2" name="address2" value="नेहरू नगर" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address3">Address 3 <span class="required">*</span></label>
+                <input type="text" id="address3" name="address3" value="वाराणसी" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pincode">Pincode <span class="required">*</span></label>
+                <input type="text" id="pincode" name="pincode" value="221001" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="mobileNumber">Mobile Number</label>
+                <input type="tel" id="mobileNumber" name="mobileNumber" value="9876543210" disabled>
+            </div>
+            
+            <div class="form-group">
+                <label for="emailId">Email ID</label>
+                <input type="email" id="emailId" name="emailId" placeholder="Enter your email">
+            </div>
+            
+            <div class="form-group">
+                <label for="alternateMobile">Alternate Mobile Number</label>
+                <input type="tel" id="alternateMobile" name="alternateMobile" placeholder="Enter alternate mobile number" pattern="[0-9]{10}">
+            </div>
+            
+            <div class="form-group">
+                <label for="remarks">Remarks (Maximum 200 characters)</label>
+                <textarea id="remarks" name="remarks" maxlength="200" placeholder="Enter your remarks here..."></textarea>
+                <div class="char-count"><span id="charCount">0</span>/200</div>
+            </div>
+            
+            <button type="submit" id="submitBtn" class="submit-btn">Submit & Proceed to Payment</button>
+        </form>
+    </div>
+    
+    <script>
+        const remarksField = document.getElementById('remarks');
+        const charCount = document.getElementById('charCount');
+        const form = document.getElementById('kalyanForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const alreadySubmittedDiv = document.getElementById('alreadySubmitted');
+        
+        // Check if form was already submitted
+        const customerId = document.getElementById('customerId').value;
+        const submissionKey = `form_submitted_${customerId}`;
+        
+        if (localStorage.getItem(submissionKey) === 'true') {
+            // Form already submitted, show message and hide form
+            form.style.display = 'none';
+            alreadySubmittedDiv.style.display = 'block';
+        }
+        
+        // Update character count
+        remarksField.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+        
+        // Form submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Check again if already submitted (double check)
+            if (localStorage.getItem(submissionKey) === 'true') {
+                alert('This form has already been submitted!');
+                return;
+            }
+            
+            // Disable submit button to prevent double submission
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+            
+            // Collect form data
+            const formData = {
+                customerId: document.getElementById('customerId').value,
+                paymentLink: document.getElementById('paymentLink').value,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                address1: document.getElementById('address1').value,
+                address2: document.getElementById('address2').value,
+                address3: document.getElementById('address3').value,
+                pincode: document.getElementById('pincode').value,
+                mobileNumber: document.getElementById('mobileNumber').value,
+                emailId: document.getElementById('emailId').value,
+                alternateMobile: document.getElementById('alternateMobile').value,
+                remarks: document.getElementById('remarks').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Replace this URL with your Google Apps Script Web App URL
+            const googleScriptURL = 'https://script.google.com/macros/s/AKfycbx_H0xt1k2ZrSLZ32hCIhbfWPu27kcGKhO5jFkt6gkHD4rfSS3YzkM0lW9JnuS2WvN5/exec';
+            
+            // Get the payment link
+            const paymentLink = formData.paymentLink;
+            
+            try {
+                // Send data to Google Sheets
+                await fetch(googleScriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                // Mark as submitted in localStorage
+                localStorage.setItem(submissionKey, 'true');
+                
+                // Redirect to payment link
+                window.location.href = paymentLink;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+                
+                // Re-enable button on error
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit & Proceed to Payment';
+            }
+        });
+    </script>
+</body>
+</html>

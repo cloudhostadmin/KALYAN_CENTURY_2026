@@ -30,13 +30,40 @@
             padding: 40px;
         }
         
-        h1 {
+        .header-section {
             text-align: center;
-            color: #667eea;
             margin-bottom: 30px;
-            font-size: 28px;
             border-bottom: 3px solid #667eea;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .header-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 28px;
+            margin: 0;
+        }
+        
+        .sub-heading {
+            color: #764ba2;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .form-group {
@@ -83,6 +110,28 @@
             font-size: 12px;
             color: #999;
             margin-top: 5px;
+        }
+        
+        .pincode-status {
+            font-size: 12px;
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        
+        .pincode-status.loading {
+            color: #667eea;
+            background-color: #e8eaf6;
+        }
+        
+        .pincode-status.success {
+            color: #28a745;
+            background-color: #d4edda;
+        }
+        
+        .pincode-status.error {
+            color: #dc3545;
+            background-color: #f8d7da;
         }
         
         .submit-btn {
@@ -143,6 +192,10 @@
             font-size: 16px;
         }
         
+        .hidden {
+            display: none !important;
+        }
+        
         @media (max-width: 600px) {
             .container {
                 padding: 25px;
@@ -151,12 +204,28 @@
             h1 {
                 font-size: 22px;
             }
+            
+            .header-image {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .sub-heading {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>कल्याण शताब्दी वर्ष 2026</h1>
+        <div class="header-section">
+            <div class="header-content">
+                <img src="https://github.com/cloudhostadmin/KALYAN_CENTURY_2026/blob/main/WhatsApp%20Image%202025-12-31%20at%204.12.43%20PM.jpeg" alt="Left Logo" class="header-image" id="leftLogo">
+                <h1>कल्याण शताब्दी वर्ष 2026</h1>
+                <img src="https://github.com/cloudhostadmin/KALYAN_CENTURY_2026/blob/main/kal2026.jpeg" alt="Right Logo" class="header-image" id="rightLogo">
+            </div>
+            <div class="sub-heading">Kalyan Renewal Form</div>
+        </div>
         
         <div id="alreadySubmitted" class="already-submitted" style="display: none;">
             <h2>✅ Already Submitted</h2>
@@ -200,12 +269,23 @@
             
             <div class="form-group">
                 <label for="pincode">Pincode <span class="required">*</span></label>
-                <input type="text" id="pincode" name="pincode" value="221001" required>
+                <input type="text" id="pincode" name="pincode" value="221001" required pattern="[0-9]{6}" maxlength="6" placeholder="Enter 6-digit pincode">
+                <div id="pincodeStatus" class="pincode-status" style="display: none;"></div>
             </div>
             
             <div class="form-group">
-                <label for="mobileNumber">Mobile Number</label>
-                <input type="tel" id="mobileNumber" name="mobileNumber" value="9876543210" disabled>
+                <label for="city">City <span class="required">*</span></label>
+                <input type="text" id="city" name="city" value="" required placeholder="Enter city or auto-filled from pincode">
+            </div>
+            
+            <div class="form-group">
+                <label for="state">State <span class="required">*</span></label>
+                <input type="text" id="state" name="state" value="" required placeholder="Enter state or auto-filled from pincode">
+            </div>
+            
+            <div class="form-group">
+                <label for="mobileNumber">Mobile Number <span class="required">*</span></label>
+                <input type="tel" id="mobileNumber" name="mobileNumber" value="9876543210" disabled required pattern="[0-9]{10}" maxlength="10" placeholder="Enter 10-digit mobile number">
             </div>
             
             <div class="form-group">
@@ -214,11 +294,12 @@
             </div>
             
             <div class="form-group">
-                <label for="alternateMobile">Alternate Mobile Number</label>
-                <input type="tel" id="alternateMobile" name="alternateMobile" placeholder="Enter alternate mobile number" pattern="[0-9]{10}">
+                <label for="alternateMobile">Alternate Mobile / WhatsApp Number</label>
+                <input type="tel" id="alternateMobile" name="alternateMobile" placeholder="Enter alternate mobile number" pattern="[0-9]{10}" maxlength="10">
             </div>
             
-            <div class="form-group">
+            <!-- Hidden Remarks Field -->
+            <div class="form-group hidden">
                 <label for="remarks">Remarks (Maximum 200 characters)</label>
                 <textarea id="remarks" name="remarks" maxlength="200" placeholder="Enter your remarks here..."></textarea>
                 <div class="char-count"><span id="charCount">0</span>/200</div>
@@ -234,6 +315,11 @@
         const form = document.getElementById('kalyanForm');
         const submitBtn = document.getElementById('submitBtn');
         const alreadySubmittedDiv = document.getElementById('alreadySubmitted');
+        const pincodeInput = document.getElementById('pincode');
+        const cityInput = document.getElementById('city');
+        const stateInput = document.getElementById('state');
+        const pincodeStatus = document.getElementById('pincodeStatus');
+        const mobileInput = document.getElementById('mobileNumber');
         
         // Function to get URL parameters (supports both ? and # formats)
         function getUrlParameter(name) {
@@ -250,6 +336,79 @@
             return value || '';
         }
         
+        // Function to fetch city and state from pincode
+        async function fetchLocationFromPincode(pincode) {
+            if (pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
+                return null;
+            }
+            
+            try {
+                pincodeStatus.textContent = '🔍 Fetching location...';
+                pincodeStatus.className = 'pincode-status loading';
+                pincodeStatus.style.display = 'block';
+                
+                // Using India Post Pincode API
+                const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+                const data = await response.json();
+                
+                if (data && data[0] && data[0].Status === 'Success' && data[0].PostOffice && data[0].PostOffice.length > 0) {
+                    const postOffice = data[0].PostOffice[0];
+                    
+                    pincodeStatus.textContent = '✅ Location found!';
+                    pincodeStatus.className = 'pincode-status success';
+                    
+                    setTimeout(() => {
+                        pincodeStatus.style.display = 'none';
+                    }, 3000);
+                    
+                    return {
+                        city: postOffice.District || postOffice.Block || '',
+                        state: postOffice.State || ''
+                    };
+                } else {
+                    pincodeStatus.textContent = '❌ Invalid pincode - Please enter city and state manually';
+                    pincodeStatus.className = 'pincode-status error';
+                    
+                    setTimeout(() => {
+                        pincodeStatus.style.display = 'none';
+                    }, 4000);
+                    
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error fetching pincode data:', error);
+                pincodeStatus.textContent = '⚠️ Error fetching location - Please enter city and state manually';
+                pincodeStatus.className = 'pincode-status error';
+                
+                setTimeout(() => {
+                    pincodeStatus.style.display = 'none';
+                }, 4000);
+                
+                return null;
+            }
+        }
+        
+        // Pincode input event listener
+        pincodeInput.addEventListener('input', async function(e) {
+            const pincode = e.target.value.trim();
+            
+            // Don't clear city and state if pincode is incomplete
+            if (pincode.length < 6) {
+                pincodeStatus.style.display = 'none';
+                return;
+            }
+            
+            // Fetch location when 6 digits are entered
+            if (pincode.length === 6) {
+                const location = await fetchLocationFromPincode(pincode);
+                if (location) {
+                    cityInput.value = location.city;
+                    stateInput.value = location.state;
+                }
+                // If location not found, keep existing values or allow manual entry
+            }
+        });
+        
         // Populate form fields from URL parameters
         function populateFormFromUrl() {
             const customerId = getUrlParameter('customerId');
@@ -259,8 +418,14 @@
             const address2 = getUrlParameter('address2');
             const address3 = getUrlParameter('address3');
             const pincode = getUrlParameter('pincode');
+            const city = getUrlParameter('city');
+            const state = getUrlParameter('state');
             const mobile = getUrlParameter('mobile');
+            const email = getUrlParameter('email');
+            const alternateMobile = getUrlParameter('alternateMobile');
             const paymentLink = getUrlParameter('paymentLink');
+            const leftLogoUrl = getUrlParameter('leftLogo');
+            const rightLogoUrl = getUrlParameter('rightLogo');
             
             if (customerId) document.getElementById('customerId').value = decodeURIComponent(customerId);
             if (firstName) document.getElementById('firstName').value = decodeURIComponent(firstName);
@@ -268,13 +433,35 @@
             if (address1) document.getElementById('address1').value = decodeURIComponent(address1);
             if (address2) document.getElementById('address2').value = decodeURIComponent(address2);
             if (address3) document.getElementById('address3').value = decodeURIComponent(address3);
-            if (pincode) document.getElementById('pincode').value = decodeURIComponent(pincode);
+            
+            if (pincode) {
+                const pincodeValue = decodeURIComponent(pincode);
+                document.getElementById('pincode').value = pincodeValue;
+                // Trigger pincode lookup if provided in URL and city/state not provided
+                if (!city && !state && pincodeValue.length === 6) {
+                    fetchLocationFromPincode(pincodeValue).then(location => {
+                        if (location) {
+                            cityInput.value = location.city;
+                            stateInput.value = location.state;
+                        }
+                    });
+                }
+            }
+            
+            if (city) document.getElementById('city').value = decodeURIComponent(city);
+            if (state) document.getElementById('state').value = decodeURIComponent(state);
             if (mobile) document.getElementById('mobileNumber').value = decodeURIComponent(mobile);
+            if (email) document.getElementById('emailId').value = decodeURIComponent(email);
+            if (alternateMobile) document.getElementById('alternateMobile').value = decodeURIComponent(alternateMobile);
             if (paymentLink) document.getElementById('paymentLink').value = decodeURIComponent(paymentLink);
+            
+            // Update logo images if provided
+            if (leftLogoUrl) document.getElementById('leftLogo').src = decodeURIComponent(leftLogoUrl);
+            if (rightLogoUrl) document.getElementById('rightLogo').src = decodeURIComponent(rightLogoUrl);
             
             // Debug: Log what was found
             console.log('URL Parameters:', {
-                customerId, firstName, lastName, address1, address2, address3, pincode, mobile, paymentLink
+                customerId, firstName, lastName, address1, address2, address3, pincode, city, state, mobile, email, alternateMobile, paymentLink, leftLogoUrl, rightLogoUrl
             });
         }
         
@@ -291,7 +478,7 @@
         //     alreadySubmittedDiv.style.display = 'block';
         // }
         
-        // Update character count
+        // Update character count for remarks (even though hidden)
         remarksField.addEventListener('input', function() {
             charCount.textContent = this.value.length;
         });
@@ -320,6 +507,8 @@
                 address2: document.getElementById('address2').value,
                 address3: document.getElementById('address3').value,
                 pincode: document.getElementById('pincode').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
                 mobileNumber: document.getElementById('mobileNumber').value,
                 emailId: document.getElementById('emailId').value,
                 alternateMobile: document.getElementById('alternateMobile').value,

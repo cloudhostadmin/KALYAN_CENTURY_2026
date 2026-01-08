@@ -235,15 +235,61 @@
         const submitBtn = document.getElementById('submitBtn');
         const alreadySubmittedDiv = document.getElementById('alreadySubmitted');
         
-        // Check if form was already submitted
-        const customerId = document.getElementById('customerId').value;
-        const submissionKey = `form_submitted_${customerId}`;
-        
-        if (localStorage.getItem(submissionKey) === 'true') {
-            // Form already submitted, show message and hide form
-            form.style.display = 'none';
-            alreadySubmittedDiv.style.display = 'block';
+        // Function to get URL parameters (supports both ? and # formats)
+        function getUrlParameter(name) {
+            // First try query parameters (after ?)
+            let urlParams = new URLSearchParams(window.location.search);
+            let value = urlParams.get(name);
+            
+            // If not found, try hash parameters (after #)
+            if (!value && window.location.hash) {
+                const hashParams = new URLSearchParams(window.location.hash.substring(1));
+                value = hashParams.get(name);
+            }
+            
+            return value || '';
         }
+        
+        // Populate form fields from URL parameters
+        function populateFormFromUrl() {
+            const customerId = getUrlParameter('customerId');
+            const firstName = getUrlParameter('firstName');
+            const lastName = getUrlParameter('lastName');
+            const address1 = getUrlParameter('address1');
+            const address2 = getUrlParameter('address2');
+            const address3 = getUrlParameter('address3');
+            const pincode = getUrlParameter('pincode');
+            const mobile = getUrlParameter('mobile');
+            const paymentLink = getUrlParameter('paymentLink');
+            
+            if (customerId) document.getElementById('customerId').value = decodeURIComponent(customerId);
+            if (firstName) document.getElementById('firstName').value = decodeURIComponent(firstName);
+            if (lastName) document.getElementById('lastName').value = decodeURIComponent(lastName);
+            if (address1) document.getElementById('address1').value = decodeURIComponent(address1);
+            if (address2) document.getElementById('address2').value = decodeURIComponent(address2);
+            if (address3) document.getElementById('address3').value = decodeURIComponent(address3);
+            if (pincode) document.getElementById('pincode').value = decodeURIComponent(pincode);
+            if (mobile) document.getElementById('mobileNumber').value = decodeURIComponent(mobile);
+            if (paymentLink) document.getElementById('paymentLink').value = decodeURIComponent(paymentLink);
+            
+            // Debug: Log what was found
+            console.log('URL Parameters:', {
+                customerId, firstName, lastName, address1, address2, address3, pincode, mobile, paymentLink
+            });
+        }
+        
+        // Populate form on page load
+        populateFormFromUrl();
+        
+        // Check if form was already submitted - DISABLED FOR NOW
+        // const customerId = document.getElementById('customerId').value;
+        // const submissionKey = `form_submitted_${customerId}`;
+        
+        // if (localStorage.getItem(submissionKey) === 'true') {
+        //     // Form already submitted, show message and hide form
+        //     form.style.display = 'none';
+        //     alreadySubmittedDiv.style.display = 'block';
+        // }
         
         // Update character count
         remarksField.addEventListener('input', function() {
@@ -254,11 +300,11 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Check again if already submitted (double check)
-            if (localStorage.getItem(submissionKey) === 'true') {
-                alert('This form has already been submitted!');
-                return;
-            }
+            // Check again if already submitted (double check) - DISABLED FOR NOW
+            // if (localStorage.getItem(submissionKey) === 'true') {
+            //     alert('This form has already been submitted!');
+            //     return;
+            // }
             
             // Disable submit button to prevent double submission
             submitBtn.disabled = true;
@@ -298,8 +344,8 @@
                     body: JSON.stringify(formData)
                 });
                 
-                // Mark as submitted in localStorage
-                localStorage.setItem(submissionKey, 'true');
+                // Mark as submitted in localStorage - DISABLED FOR NOW
+                // localStorage.setItem(submissionKey, 'true');
                 
                 // Redirect to payment link
                 window.location.href = paymentLink;

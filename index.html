@@ -562,15 +562,15 @@
         // Populate form on page load
         populateFormFromUrl();
         
-        // Check if form was already submitted - DISABLED FOR NOW
-        // const customerId = document.getElementById('customerId').value;
-        // const submissionKey = `form_submitted_${customerId}`;
+        // Check if form was already submitted
+        const customerId = document.getElementById('customerId').value;
+        const submissionKey = `form_submitted_${customerId}`;
         
-        // if (localStorage.getItem(submissionKey) === 'true') {
-        //     // Form already submitted, show message and hide form
-        //     form.style.display = 'none';
-        //     alreadySubmittedDiv.style.display = 'block';
-        // }
+        if (localStorage.getItem(submissionKey) === 'true') {
+            // Form already submitted, show message and hide form
+            form.style.display = 'none';
+            alreadySubmittedDiv.style.display = 'block';
+        }
         
         // Update character count for remarks (even though hidden)
         remarksField.addEventListener('input', function() {
@@ -581,11 +581,11 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Check again if already submitted (double check) - DISABLED FOR NOW
-            // if (localStorage.getItem(submissionKey) === 'true') {
-            //     alert('This form has already been submitted!');
-            //     return;
-            // }
+            // Check again if already submitted (double check)
+            if (localStorage.getItem(submissionKey) === 'true') {
+                alert('This form has already been submitted!');
+                return;
+            }
             
             // Disable submit button to prevent double submission
             submitBtn.disabled = true;
@@ -627,8 +627,8 @@
                     body: JSON.stringify(formData)
                 });
                 
-                // Mark as submitted in localStorage - DISABLED FOR NOW
-                // localStorage.setItem(submissionKey, 'true');
+                // Mark as submitted in localStorage
+                localStorage.setItem(submissionKey, 'true');
                 
                 // Redirect to payment link
                 window.location.href = paymentLink;

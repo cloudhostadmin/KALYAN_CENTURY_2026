@@ -37,7 +37,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 30px;
         }
         
         .header-text {
@@ -46,8 +46,8 @@
         }
         
         .header-image {
-            width: 100px;
-            height: 100px;
+            width: var(--logo-size, 180px);
+            height: var(--logo-size, 180px);
             object-fit: contain;
             flex-shrink: 0;
         }
@@ -223,16 +223,17 @@
             
             .header-section {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
+                text-align: center;
             }
             
             .header-text {
-                text-align: left;
+                text-align: center;
             }
             
             .header-image {
-                width: 80px;
-                height: 80px;
+                width: var(--logo-size-mobile, calc(var(--logo-size, 180px) * 0.7));
+                height: var(--logo-size-mobile, calc(var(--logo-size, 180px) * 0.7));
                 align-self: center;
             }
             
@@ -502,6 +503,7 @@
             const alternateMobile = getUrlParameter('alternateMobile');
             const paymentLink = getUrlParameter('paymentLink');
             const rightLogoUrl = getUrlParameter('rightLogo');
+            const logoSize = getUrlParameter('logoSize');
             
             if (customerId) document.getElementById('customerId').value = decodeURIComponent(customerId);
             if (firstName) document.getElementById('firstName').value = decodeURIComponent(firstName);
@@ -543,9 +545,17 @@
             // Update logo image if provided
             if (rightLogoUrl) document.getElementById('rightLogo').src = decodeURIComponent(rightLogoUrl);
             
+            // Update logo size if provided (accepts values like 80, 120, 150, etc.)
+            if (logoSize) {
+                const size = parseInt(decodeURIComponent(logoSize));
+                if (!isNaN(size) && size > 0 && size <= 300) {
+                    document.documentElement.style.setProperty('--logo-size', `${size}px`);
+                }
+            }
+            
             // Debug: Log what was found
             console.log('URL Parameters:', {
-                customerId, firstName, lastName, address1, address2, address3, pincode, city, state, mobile, email, alternateMobile, paymentLink, rightLogoUrl
+                customerId, firstName, lastName, address1, address2, address3, pincode, city, state, mobile, email, alternateMobile, paymentLink, rightLogoUrl, logoSize
             });
         }
         
@@ -635,4 +645,3 @@
     </script>
 </body>
 </html>
-

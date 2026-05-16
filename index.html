@@ -5,400 +5,632 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>कल्याण शताब्दी वर्ष</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 50%, #fff9e6 100%);
-            min-height: 100vh; padding: 20px;
-            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+        
         .container {
-            background: white; border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(218,165,32,0.15);
-            max-width: 600px; width: 100%; padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(218, 165, 32, 0.15);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
             border: 2px solid #f5e6c3;
         }
+        
         .header-section {
-            margin-bottom: 30px; border-bottom: 3px solid #d4a017;
-            padding-bottom: 20px; display: flex;
-            align-items: center; justify-content: space-between; gap: 30px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #d4a017;
+            padding-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
         }
-        .header-text { flex: 1; text-align: left; }
+        
+        .header-text {
+            flex: 1;
+            text-align: left;
+        }
+        
         .header-image {
-            width: var(--logo-size, 180px); height: var(--logo-size, 180px);
-            object-fit: contain; flex-shrink: 0;
+            width: var(--logo-size, 180px);
+            height: var(--logo-size, 180px);
+            object-fit: contain;
+            flex-shrink: 0;
         }
-        h1 { color: #c17817; font-size: 28px; margin: 0 0 10px 0; font-weight: 700; text-shadow: 1px 1px 2px rgba(193,120,23,0.1); }
-        .sub-heading { color: #8b6914; font-size: 16px; font-weight: 600; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px; }
-        .sub-heading-note { color: #666; font-size: 13px; font-weight: 500; margin-top: 8px; font-style: italic; }
-        .edit-notice { color: #e74c3c; font-size: 14px; font-weight: 600; margin-bottom: 20px; text-align: left; }
-        .edit-notice::before { content: "★ "; font-size: 14px; margin-right: 3px; }
-        .form-group { margin-bottom: 20px; }
-        .form-row { display: grid; grid-template-columns: 1fr 2fr 2fr; gap: 15px; margin-bottom: 20px; }
-        .form-row .form-group { margin-bottom: 0; }
-        label { display: block; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 14px; }
+        
+        h1 {
+            color: #c17817;
+            font-size: 28px;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(193, 120, 23, 0.1);
+        }
+        
+        .sub-heading {
+            color: #8b6914;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .sub-heading-note {
+            color: #666;
+            font-size: 13px;
+            font-weight: 500;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        
+        .edit-notice {
+            color: #e74c3c;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .edit-notice::before {
+            content: "★ ";
+            font-size: 14px;
+            margin-right: 3px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 2fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
         input, textarea {
-            width: 100%; padding: 12px; border: 2px solid #e0e0e0;
-            border-radius: 8px; font-size: 14px; transition: all 0.3s ease;
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
         }
-        input:disabled { background-color: #f5f5f5; cursor: not-allowed; color: #666; }
+        
+        input:disabled {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+            color: #666;
+        }
+        
         input:not(:disabled):focus, textarea:focus {
-            outline: none; border-color: #d4a017;
-            box-shadow: 0 0 0 3px rgba(212,160,23,0.1);
+            outline: none;
+            border-color: #d4a017;
+            box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.1);
         }
-        textarea { resize: vertical; min-height: 80px; font-family: inherit; }
-        .char-count { text-align: right; font-size: 12px; color: #999; margin-top: 5px; }
-        .pincode-status { font-size: 12px; margin-top: 5px; padding: 5px; border-radius: 4px; }
-        .pincode-status.loading { color: #c17817; background-color: #fffbf0; border: 1px solid #f5e6c3; }
-        .pincode-status.success { color: #28a745; background-color: #d4edda; }
-        .pincode-status.error { color: #dc3545; background-color: #f8d7da; }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+        
+        .char-count {
+            text-align: right;
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        .pincode-status {
+            font-size: 12px;
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        
+        .pincode-status.loading {
+            color: #c17817;
+            background-color: #fffbf0;
+            border: 1px solid #f5e6c3;
+        }
+        
+        .pincode-status.success {
+            color: #28a745;
+            background-color: #d4edda;
+        }
+        
+        .pincode-status.error {
+            color: #dc3545;
+            background-color: #f8d7da;
+        }
+        
         .submit-btn {
-            width: 100%; padding: 15px;
+            width: 100%;
+            padding: 15px;
             background: linear-gradient(135deg, #d4a017 0%, #c17817 100%);
-            color: white; border: none; border-radius: 8px;
-            font-size: 16px; font-weight: 600; cursor: pointer;
-            transition: all 0.3s ease; margin-top: 10px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
         }
-        .submit-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(212,160,23,0.4); background: linear-gradient(135deg, #e5b01f 0%, #d08820 100%); }
-        .submit-btn:active:not(:disabled) { transform: translateY(0); }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .required { color: #e74c3c; }
-        .already-submitted { text-align: center; padding: 40px 20px; }
-        .already-submitted h2 { color: #c17817; margin-bottom: 15px; }
-        .already-submitted p { color: #666; font-size: 16px; }
-        .hidden { display: none !important; }
+        
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 160, 23, 0.4);
+            background: linear-gradient(135deg, #e5b01f 0%, #d08820 100%);
+        }
+        
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .already-submitted {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .already-submitted h2 {
+            color: #c17817;
+            margin-bottom: 15px;
+        }
+        
+        .already-submitted p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
         @media (max-width: 600px) {
-            .container { padding: 25px; }
-            .header-section { flex-direction: column; align-items: center; text-align: center; }
-            .header-text { text-align: center; }
-            .header-image { width: var(--logo-size-mobile, calc(var(--logo-size, 180px) * 0.7)); height: var(--logo-size-mobile, calc(var(--logo-size, 180px) * 0.7)); align-self: center; }
-            h1 { font-size: 22px; }
-            .sub-heading { font-size: 14px; }
-            .sub-heading-note { font-size: 12px; }
-            .form-row { grid-template-columns: 1fr; gap: 0; }
-            .form-row .form-group { margin-bottom: 20px; }
+            .container {
+                padding: 25px;
+            }
+            
+            .header-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .header-text {
+                text-align: center;
+            }
+            
+            .header-image {
+                width: var(--logo-size-mobile, calc(var(--logo-size, 180px) * 0.7));
+                height: var(--logo-size-mobile, calc(var(--logo-size, 180px) * 0.7));
+                align-self: center;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            .sub-heading {
+                font-size: 14px;
+            }
+            
+            .sub-heading-note {
+                font-size: 12px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .form-row .form-group {
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header-section">
-        <div class="header-text">
-            <h1>कल्याण शताब्दी वर्ष</h1>
-            <div class="sub-heading">Kalyan 2026 Renewal Form</div>
-            <div class="sub-heading-note">Only for Renewal of Existing Subscriptions</div>
+    <div class="container">
+        <div class="header-section">
+            <div class="header-text">
+                <h1>कल्याण शताब्दी वर्ष</h1>
+                <div class="sub-heading">Kalyan 2026 Renewal Form</div>
+                <div class="sub-heading-note">Only for Renewal of Existing Subscriptions</div>
+            </div>
+            <img src="https://raw.githubusercontent.com/cloudhostadmin/KALYAN_CENTURY_2026/main/kal2026.jpeg" alt="Kalyan Logo" class="header-image" id="rightLogo">
         </div>
-        <img src="https://raw.githubusercontent.com/cloudhostadmin/KALYAN_CENTURY_2026/main/kal2026.jpeg"
-             alt="Kalyan Logo" class="header-image" id="rightLogo">
+        
+        <div id="alreadySubmitted" class="already-submitted" style="display: none;">
+            <h2>✅ Already Submitted</h2>
+            <p>This form has already been submitted and cannot be submitted again.</p>
+            <p style="margin-top: 10px; color: #999;">Thank you for your submission!</p>
+        </div>
+        
+        <form id="kalyanForm">
+            <div class="edit-notice">
+                Please Edit the Fields if data is incorrect
+            </div>
+            
+            <div class="form-group">
+                <label for="customerId">Customer ID</label>
+                <input type="text" id="customerId" name="customerId" value="" disabled>
+            </div>
+            
+            <!-- Hidden payment link field -->
+            <input type="hidden" id="paymentLink" name="paymentLink" value="https://p.ppsl.io/PYTMPS/f4FEqk">
+            
+            <div class="form-group">
+                <label for="firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" name="firstName" value="" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" name="lastName" value="" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address1">Address 1 <span class="required">*</span></label>
+                <input type="text" id="address1" name="address1" value="" required maxlength="40">
+                <div class="char-count"><span id="address1Count">0</span>/40</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address2">Address 2 <span class="required">*</span></label>
+                <input type="text" id="address2" name="address2" value="" required maxlength="40">
+                <div class="char-count"><span id="address2Count">0</span>/40</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address3">Address 3</label>
+                <input type="text" id="address3" name="address3" value="" maxlength="40">
+                <div class="char-count"><span id="address3Count">0</span>/40</div>
+            </div>
+            
+            <!-- Pincode, City, State in one row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="pincode">Pincode <span class="required">*</span></label>
+                    <input type="text" id="pincode" name="pincode" value="" required pattern="[0-9]{6}" maxlength="6" placeholder="6-digit">
+                    <div id="pincodeStatus" class="pincode-status" style="display: none;"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">City <span class="required">*</span></label>
+                    <input type="text" id="city" name="city" value="" required placeholder="Auto-filled">
+                </div>
+                
+                <div class="form-group">
+                    <label for="state">State <span class="required">*</span></label>
+                    <input type="text" id="state" name="state" value="" required placeholder="Auto-filled">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="mobileNumber">Mobile Number <span class="required">*</span></label>
+                <input type="tel" id="mobileNumber" name="mobileNumber" value="" disabled required pattern="[0-9]{10}" maxlength="10" placeholder="Mobile number">
+            </div>
+            
+            <div class="form-group">
+                <label for="emailId">Email ID</label>
+                <input type="email" id="emailId" name="emailId" placeholder="Please provide for Easier communications">
+            </div>
+            
+            <div class="form-group">
+                <label for="alternateMobile">Alternate Mobile / WhatsApp Number</label>
+                <input type="tel" id="alternateMobile" name="alternateMobile" placeholder="Enter alternate mobile number" pattern="[0-9]{10}" maxlength="10">
+            </div>
+            
+            <!-- Hidden Remarks Field -->
+            <div class="form-group hidden">
+                <label for="remarks">Remarks (Maximum 200 characters)</label>
+                <textarea id="remarks" name="remarks" maxlength="200" placeholder="Enter your remarks here..."></textarea>
+                <div class="char-count"><span id="charCount">0</span>/200</div>
+            </div>
+            
+            <button type="submit" id="submitBtn" class="submit-btn">Submit & Proceed to Payment</button>
+        </form>
     </div>
-
-    <div id="alreadySubmitted" class="already-submitted" style="display:none;">
-        <h2>✅ Already Submitted</h2>
-        <p>This form has already been submitted and cannot be submitted again.</p>
-        <p style="margin-top:10px;color:#999;">Thank you for your submission!</p>
-    </div>
-
-    <form id="kalyanForm">
-        <div class="edit-notice">Please Edit the Fields if data is incorrect</div>
-
-        <div class="form-group">
-            <label for="customerId">Customer ID</label>
-            <input type="text" id="customerId" name="customerId" value="" disabled>
-        </div>
-
-        <input type="hidden" id="paymentLink" name="paymentLink" value="https://p.ppsl.io/PYTMPS/f4FEqk">
-
-        <div class="form-group">
-            <label for="firstName">First Name <span class="required">*</span></label>
-            <input type="text" id="firstName" name="firstName" value="" required>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Last Name <span class="required">*</span></label>
-            <input type="text" id="lastName" name="lastName" value="" required>
-        </div>
-        <div class="form-group">
-            <label for="address1">Address 1 <span class="required">*</span></label>
-            <input type="text" id="address1" name="address1" value="" required maxlength="40">
-            <div class="char-count"><span id="address1Count">0</span>/40</div>
-        </div>
-        <div class="form-group">
-            <label for="address2">Address 2 <span class="required">*</span></label>
-            <input type="text" id="address2" name="address2" value="" required maxlength="40">
-            <div class="char-count"><span id="address2Count">0</span>/40</div>
-        </div>
-        <div class="form-group">
-            <label for="address3">Address 3</label>
-            <input type="text" id="address3" name="address3" value="" maxlength="40">
-            <div class="char-count"><span id="address3Count">0</span>/40</div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="pincode">Pincode <span class="required">*</span></label>
-                <input type="text" id="pincode" name="pincode" value="" required pattern="[0-9]{6}" maxlength="6" placeholder="6-digit">
-                <div id="pincodeStatus" class="pincode-status" style="display:none;"></div>
-            </div>
-            <div class="form-group">
-                <label for="city">City <span class="required">*</span></label>
-                <input type="text" id="city" name="city" value="" required placeholder="Auto-filled">
-            </div>
-            <div class="form-group">
-                <label for="state">State <span class="required">*</span></label>
-                <input type="text" id="state" name="state" value="" required placeholder="Auto-filled">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="mobileNumber">Mobile Number <span class="required">*</span></label>
-            <input type="tel" id="mobileNumber" name="mobileNumber" value="" disabled required pattern="[0-9]{10}" maxlength="10" placeholder="Mobile number">
-        </div>
-        <div class="form-group">
-            <label for="emailId">Email ID</label>
-            <input type="email" id="emailId" name="emailId" placeholder="Please provide for Easier communications">
-        </div>
-        <div class="form-group">
-            <label for="alternateMobile">Alternate Mobile / WhatsApp Number</label>
-            <input type="tel" id="alternateMobile" name="alternateMobile" placeholder="Enter alternate mobile number" pattern="[0-9]{10}" maxlength="10">
-        </div>
-
-        <!-- Hidden Remarks Field -->
-        <div class="form-group hidden">
-            <label for="remarks">Remarks (Maximum 200 characters)</label>
-            <textarea id="remarks" name="remarks" maxlength="200" placeholder="Enter your remarks here..."></textarea>
-            <div class="char-count"><span id="charCount">0</span>/200</div>
-        </div>
-
-        <button type="submit" id="submitBtn" class="submit-btn">Submit &amp; Proceed to Payment</button>
-    </form>
-</div>
-
-<script>
-// ============================================================
-//  DECODER — reads ?d= compressed token from SMS URL
-//  Falls back to plain ?key=value params if no token found
-// ============================================================
-(function() {
-    var params = new URLSearchParams(window.location.search);
-    var token = params.get('d');
-
-    var customerParams;
-
-    if (token) {
-        // ── Compressed token path ──────────────────────────
-        var b64 = token.replace(/-/g, '+').replace(/_/g, '/');
-        while (b64.length % 4) b64 += '=';
-        var queryString;
-        try {
-            queryString = decodeURIComponent(escape(atob(b64)));
-        } catch (e) {
-            console.error('SMS token decode failed:', e);
+    
+    <script>
+        const remarksField = document.getElementById('remarks');
+        const charCount = document.getElementById('charCount');
+        const form = document.getElementById('kalyanForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const alreadySubmittedDiv = document.getElementById('alreadySubmitted');
+        const pincodeInput = document.getElementById('pincode');
+        const cityInput = document.getElementById('city');
+        const stateInput = document.getElementById('state');
+        const pincodeStatus = document.getElementById('pincodeStatus');
+        const mobileInput = document.getElementById('mobileNumber');
+        const address1Input = document.getElementById('address1');
+        const address2Input = document.getElementById('address2');
+        const address3Input = document.getElementById('address3');
+        const address1CountSpan = document.getElementById('address1Count');
+        const address2CountSpan = document.getElementById('address2Count');
+        const address3CountSpan = document.getElementById('address3Count');
+        
+        function updateCharCount(input, countSpan) {
+            countSpan.textContent = input.value.length;
         }
-        if (queryString) {
-            customerParams = new URLSearchParams(queryString);
-        }
-    }
-
-    // If no token or decode failed, read plain URL params directly
-    if (!customerParams) {
-        customerParams = params;
-    }
-
-    // ── Helper: get value from decoded params ──────────────
-    function get(key) {
-        var v = customerParams.get(key);
-        return v ? decodeURIComponent(v) : '';
-    }
-
-    // ── Extract all fields ─────────────────────────────────
-    window._kalyanData = {
-        customerId:   get('customerId'),
-        firstName:    get('firstName'),
-        lastName:     get('lastName'),
-        address1:     get('address1'),
-        address2:     get('address2'),
-        address3:     get('address3'),
-        pincode:      get('pincode'),
-        city:         get('city'),
-        state:        get('state'),
-        // mobilenumber (lowercase) is how the SMS tool encodes it
-        mobileNumber: get('mobileNumber') || get('mobilenumber') || get('mobile'),
-        email:        get('email') || get('emailId'),
-        alternateMobile: get('alternateMobile'),
-        paymentLink:  get('paymentLink'),
-        rightLogo:    get('rightLogo'),
-        logoSize:     get('logoSize')
-    };
-
-    console.log('Customer data loaded:', window._kalyanData);
-})();
-
-// ============================================================
-//  FORM LOGIC
-// ============================================================
-const remarksField   = document.getElementById('remarks');
-const charCount      = document.getElementById('charCount');
-const form           = document.getElementById('kalyanForm');
-const submitBtn      = document.getElementById('submitBtn');
-const alreadySubmittedDiv = document.getElementById('alreadySubmitted');
-const pincodeInput   = document.getElementById('pincode');
-const cityInput      = document.getElementById('city');
-const stateInput     = document.getElementById('state');
-const pincodeStatus  = document.getElementById('pincodeStatus');
-const address1Input  = document.getElementById('address1');
-const address2Input  = document.getElementById('address2');
-const address3Input  = document.getElementById('address3');
-const address1CountSpan = document.getElementById('address1Count');
-const address2CountSpan = document.getElementById('address2Count');
-const address3CountSpan = document.getElementById('address3Count');
-
-function updateCharCount(input, countSpan) {
-    countSpan.textContent = input.value.length;
-}
-
-address1Input.addEventListener('input', function() { updateCharCount(this, address1CountSpan); });
-address2Input.addEventListener('input', function() { updateCharCount(this, address2CountSpan); });
-address3Input.addEventListener('input', function() { updateCharCount(this, address3CountSpan); });
-
-// ── Pincode lookup ─────────────────────────────────────────
-async function fetchLocationFromPincode(pincode) {
-    if (pincode.length !== 6 || !/^\d{6}$/.test(pincode)) return null;
-    try {
-        pincodeStatus.textContent = '🔍 Fetching location...';
-        pincodeStatus.className = 'pincode-status loading';
-        pincodeStatus.style.display = 'block';
-        const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
-        const data = await response.json();
-        if (data && data[0] && data[0].Status === 'Success' && data[0].PostOffice && data[0].PostOffice.length > 0) {
-            const po = data[0].PostOffice[0];
-            pincodeStatus.textContent = '✅ Location found!';
-            pincodeStatus.className = 'pincode-status success';
-            setTimeout(() => { pincodeStatus.style.display = 'none'; }, 3000);
-            return { city: po.District || po.Block || '', state: po.State || '' };
-        } else {
-            pincodeStatus.textContent = '❌ Invalid pincode – please enter city and state manually';
-            pincodeStatus.className = 'pincode-status error';
-            setTimeout(() => { pincodeStatus.style.display = 'none'; }, 4000);
-            return null;
-        }
-    } catch (error) {
-        console.error('Error fetching pincode:', error);
-        pincodeStatus.textContent = '⚠️ Error fetching location – please enter city and state manually';
-        pincodeStatus.className = 'pincode-status error';
-        setTimeout(() => { pincodeStatus.style.display = 'none'; }, 4000);
-        return null;
-    }
-}
-
-pincodeInput.addEventListener('input', async function(e) {
-    const pincode = e.target.value.trim();
-    if (pincode.length < 6) { pincodeStatus.style.display = 'none'; return; }
-    if (pincode.length === 6) {
-        const location = await fetchLocationFromPincode(pincode);
-        if (location) { cityInput.value = location.city; stateInput.value = location.state; }
-    }
-});
-
-// ── Populate form from decoded data ───────────────────────
-function populateFormFromUrl() {
-    const d = window._kalyanData || {};
-
-    if (d.customerId)   document.getElementById('customerId').value  = d.customerId;
-    if (d.firstName)    document.getElementById('firstName').value   = d.firstName;
-    if (d.lastName)     document.getElementById('lastName').value    = d.lastName;
-
-    if (d.address1) { document.getElementById('address1').value = d.address1; updateCharCount(address1Input, address1CountSpan); }
-    if (d.address2) { document.getElementById('address2').value = d.address2; updateCharCount(address2Input, address2CountSpan); }
-    if (d.address3) { document.getElementById('address3').value = d.address3; updateCharCount(address3Input, address3CountSpan); }
-
-    if (d.pincode) {
-        document.getElementById('pincode').value = d.pincode;
-        if (!d.city && !d.state && d.pincode.length === 6) {
-            fetchLocationFromPincode(d.pincode).then(location => {
-                if (location) { cityInput.value = location.city; stateInput.value = location.state; }
-            });
-        }
-    }
-    if (d.city)          document.getElementById('city').value         = d.city;
-    if (d.state)         document.getElementById('state').value        = d.state;
-    if (d.mobileNumber)  document.getElementById('mobileNumber').value = d.mobileNumber;
-    if (d.email)         document.getElementById('emailId').value      = d.email;
-    if (d.alternateMobile) document.getElementById('alternateMobile').value = d.alternateMobile;
-    if (d.paymentLink)   document.getElementById('paymentLink').value  = d.paymentLink;
-
-    if (d.rightLogo) document.getElementById('rightLogo').src = d.rightLogo;
-    if (d.logoSize) {
-        const size = parseInt(d.logoSize);
-        if (!isNaN(size) && size > 0 && size <= 300) {
-            document.documentElement.style.setProperty('--logo-size', `${size}px`);
-        }
-    }
-}
-
-populateFormFromUrl();
-
-// ── Already-submitted guard ────────────────────────────────
-const customerId   = document.getElementById('customerId').value;
-const submissionKey = `form_submitted_${customerId}`;
-
-if (localStorage.getItem(submissionKey) === 'true') {
-    form.style.display = 'none';
-    alreadySubmittedDiv.style.display = 'block';
-}
-
-// ── Remarks counter ────────────────────────────────────────
-remarksField.addEventListener('input', function() {
-    charCount.textContent = this.value.length;
-});
-
-// ── Form submit ────────────────────────────────────────────
-form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    if (localStorage.getItem(submissionKey) === 'true') {
-        alert('This form has already been submitted!');
-        return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Processing...';
-
-    const formData = {
-        customerId:      document.getElementById('customerId').value,
-        paymentLink:     document.getElementById('paymentLink').value,
-        firstName:       document.getElementById('firstName').value,
-        lastName:        document.getElementById('lastName').value,
-        address1:        document.getElementById('address1').value,
-        address2:        document.getElementById('address2').value,
-        address3:        document.getElementById('address3').value,
-        pincode:         document.getElementById('pincode').value,
-        city:            document.getElementById('city').value,
-        state:           document.getElementById('state').value,
-        mobileNumber:    document.getElementById('mobileNumber').value,
-        emailId:         document.getElementById('emailId').value,
-        alternateMobile: document.getElementById('alternateMobile').value,
-        remarks:         document.getElementById('remarks').value,
-        timestamp:       new Date().toISOString()
-    };
-
-    const googleScriptURL = 'https://script.google.com/macros/s/AKfycbx_H0xt1k2ZrSLZ32hCIhbfWPu27kcGKhO5jFkt6gkHD4rfSS3YzkM0lW9JnuS2WvN5/exec';
-    const paymentLink = formData.paymentLink;
-
-    try {
-        await fetch(googleScriptURL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
+        
+        address1Input.addEventListener('input', function() {
+            updateCharCount(this, address1CountSpan);
         });
-        localStorage.setItem(submissionKey, 'true');
-        window.location.href = paymentLink;
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit & Proceed to Payment';
-    }
-});
-</script>
+        
+        address2Input.addEventListener('input', function() {
+            updateCharCount(this, address2CountSpan);
+        });
+        
+        address3Input.addEventListener('input', function() {
+            updateCharCount(this, address3CountSpan);
+        });
+        
+        updateCharCount(address1Input, address1CountSpan);
+        updateCharCount(address2Input, address2CountSpan);
+        updateCharCount(address3Input, address3CountSpan);
+        
+        function getUrlParameter(name) {
+            let urlParams = new URLSearchParams(window.location.search);
+            let value = urlParams.get(name);
+            
+            if (!value && window.location.hash) {
+                const hashParams = new URLSearchParams(window.location.hash.substring(1));
+                value = hashParams.get(name);
+            }
+            
+            return value || '';
+        }
+        
+        async function fetchLocationFromPincode(pincode) {
+            if (pincode.length !== 6 || !/^\d{6}$/.test(pincode)) {
+                return null;
+            }
+            
+            try {
+                pincodeStatus.textContent = '🔍 Fetching location...';
+                pincodeStatus.className = 'pincode-status loading';
+                pincodeStatus.style.display = 'block';
+                
+                const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+                const data = await response.json();
+                
+                if (data && data[0] && data[0].Status === 'Success' && data[0].PostOffice && data[0].PostOffice.length > 0) {
+                    const postOffice = data[0].PostOffice[0];
+                    
+                    pincodeStatus.textContent = '✅ Location found!';
+                    pincodeStatus.className = 'pincode-status success';
+                    
+                    setTimeout(() => {
+                        pincodeStatus.style.display = 'none';
+                    }, 3000);
+                    
+                    return {
+                        city: postOffice.District || postOffice.Block || '',
+                        state: postOffice.State || ''
+                    };
+                } else {
+                    pincodeStatus.textContent = '❌ Invalid pincode - Please enter city and state manually';
+                    pincodeStatus.className = 'pincode-status error';
+                    
+                    setTimeout(() => {
+                        pincodeStatus.style.display = 'none';
+                    }, 4000);
+                    
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error fetching pincode data:', error);
+                pincodeStatus.textContent = '⚠️ Error fetching location - Please enter city and state manually';
+                pincodeStatus.className = 'pincode-status error';
+                
+                setTimeout(() => {
+                    pincodeStatus.style.display = 'none';
+                }, 4000);
+                
+                return null;
+            }
+        }
+        
+        pincodeInput.addEventListener('input', async function(e) {
+            const pincode = e.target.value.trim();
+            
+            if (pincode.length < 6) {
+                pincodeStatus.style.display = 'none';
+                return;
+            }
+            
+            if (pincode.length === 6) {
+                const location = await fetchLocationFromPincode(pincode);
+                if (location) {
+                    cityInput.value = location.city;
+                    stateInput.value = location.state;
+                }
+            }
+        });
+        
+        function populateFormFromUrl() {
+            const customerId = getUrlParameter('customerId');
+            const firstName = getUrlParameter('firstName');
+            const lastName = getUrlParameter('lastName');
+            const address1 = getUrlParameter('address1');
+            const address2 = getUrlParameter('address2');
+            const address3 = getUrlParameter('address3');
+            const pincode = getUrlParameter('pincode');
+            const city = getUrlParameter('city');
+            const state = getUrlParameter('state');
+            const mobile = getUrlParameter('mobile') || getUrlParameter('mobilenumber') || getUrlParameter('mobileNumber');
+            const email = getUrlParameter('email');
+            const alternateMobile = getUrlParameter('alternateMobile');
+            const paymentLink = getUrlParameter('paymentLink');
+            const rightLogoUrl = getUrlParameter('rightLogo');
+            const logoSize = getUrlParameter('logoSize');
+            
+            if (customerId) document.getElementById('customerId').value = decodeURIComponent(customerId);
+            if (firstName) document.getElementById('firstName').value = decodeURIComponent(firstName);
+            if (lastName) document.getElementById('lastName').value = decodeURIComponent(lastName);
+            if (address1) {
+                document.getElementById('address1').value = decodeURIComponent(address1);
+                updateCharCount(address1Input, address1CountSpan);
+            }
+            if (address2) {
+                document.getElementById('address2').value = decodeURIComponent(address2);
+                updateCharCount(address2Input, address2CountSpan);
+            }
+            if (address3) {
+                document.getElementById('address3').value = decodeURIComponent(address3);
+                updateCharCount(address3Input, address3CountSpan);
+            }
+            
+            if (pincode) {
+                const pincodeValue = decodeURIComponent(pincode);
+                document.getElementById('pincode').value = pincodeValue;
+                if (!city && !state && pincodeValue.length === 6) {
+                    fetchLocationFromPincode(pincodeValue).then(location => {
+                        if (location) {
+                            cityInput.value = location.city;
+                            stateInput.value = location.state;
+                        }
+                    });
+                }
+            }
+            
+            if (city) document.getElementById('city').value = decodeURIComponent(city);
+            if (state) document.getElementById('state').value = decodeURIComponent(state);
+            if (mobile) document.getElementById('mobileNumber').value = decodeURIComponent(mobile);
+            if (email) document.getElementById('emailId').value = decodeURIComponent(email);
+            if (alternateMobile) document.getElementById('alternateMobile').value = decodeURIComponent(alternateMobile);
+            if (paymentLink) document.getElementById('paymentLink').value = decodeURIComponent(paymentLink);
+            
+            if (rightLogoUrl) document.getElementById('rightLogo').src = decodeURIComponent(rightLogoUrl);
+            
+            if (logoSize) {
+                const size = parseInt(decodeURIComponent(logoSize));
+                if (!isNaN(size) && size > 0 && size <= 300) {
+                    document.documentElement.style.setProperty('--logo-size', `${size}px`);
+                }
+            }
+        }
+        
+        populateFormFromUrl();
+        
+        const customerId = document.getElementById('customerId').value;
+        const submissionKey = `form_submitted_${customerId}`;
+        
+        if (localStorage.getItem(submissionKey) === 'true') {
+            form.style.display = 'none';
+            alreadySubmittedDiv.style.display = 'block';
+        }
+        
+        remarksField.addEventListener('input', function() {
+            charCount.textContent = this.value.length;
+        });
+        
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (localStorage.getItem(submissionKey) === 'true') {
+                alert('This form has already been submitted!');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+            
+            const formData = {
+                customerId: document.getElementById('customerId').value,
+                paymentLink: document.getElementById('paymentLink').value,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                address1: document.getElementById('address1').value,
+                address2: document.getElementById('address2').value,
+                address3: document.getElementById('address3').value,
+                pincode: document.getElementById('pincode').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                mobileNumber: document.getElementById('mobileNumber').value,
+                emailId: document.getElementById('emailId').value,
+                alternateMobile: document.getElementById('alternateMobile').value,
+                remarks: document.getElementById('remarks').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            const googleScriptURL = 'https://script.google.com/macros/s/AKfycbx_H0xt1k2ZrSLZ32hCIhbfWPu27kcGKhO5jFkt6gkHD4rfSS3YzkM0lW9JnuS2WvN5/exec';
+            
+            const paymentLink = formData.paymentLink;
+            
+            try {
+                await fetch(googleScriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                localStorage.setItem(submissionKey, 'true');
+                
+                window.location.href = paymentLink;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit & Proceed to Payment';
+            }
+        });
+    </script>
 </body>
 </html>
